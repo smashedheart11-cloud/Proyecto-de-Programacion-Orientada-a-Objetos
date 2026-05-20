@@ -1,19 +1,22 @@
 package modelo;
 
 public class Pelicula {
-    int idPelicula;
-    String titulo;
-    String genero;
-    String clasificacion;
-    String idioma;
+    private String idPelicula;
+    private String titulo;
+    private String idioma;
+    private static int CONTADOR=1;
 
-    public Pelicula (int idPelicula, String titulo, String genero, String clasificacion, String idioma){
-        this.idPelicula=idPelicula;
+    public Pelicula (String titulo, String idioma){
+        this.idPelicula=String.format("PEL-%03d", CONTADOR++);
         this.titulo=titulo;
-        this.genero=genero;
-        this.clasificacion=clasificacion;
         this.idioma=idioma;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
+    public String getIdioma() {
+        return idioma;
+    }
 }

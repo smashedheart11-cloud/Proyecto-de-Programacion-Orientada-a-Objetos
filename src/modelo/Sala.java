@@ -12,7 +12,7 @@ public class Sala {
     private TipoSala tipo;
 
     public Sala(TipoSala tipo){
-        this.idSala=String.format("SAL-%03d", CONTADOR++);
+        this.idSala=asignarId();
         this.tipo=tipo;
         this.asientos=new ArrayList<>();
         definirSala();
@@ -28,6 +28,12 @@ public class Sala {
             case IMAX:
                 filas=20;
                 columnas=15;
+                generarAsientos();
+                break;
+            case VIP:
+                filas=9;
+                columnas=8;
+                generarAsientos();
         }
     }
 
@@ -46,11 +52,17 @@ public class Sala {
     public void obtenerAsientos(){
         for (Asiento a : asientos){
             System.out.print(a.numero);
-            if(a.columna==10){
+            if(a.columna==columnas){
                 System.out.println();
             }
         }
     }
 
+    private String asignarId() {
+        return idSala = String.format("SAL-%03d", CONTADOR++);
+    }
 
+    public String getIdSala() {
+        return idSala;
+    }
 }

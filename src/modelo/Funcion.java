@@ -1,7 +1,7 @@
 package modelo;
 
 public class Funcion {
-    String idFuncion;
+    private String idFuncion;
     private Pelicula pelicula;
     private String fecha;
     private String hora;
@@ -14,5 +14,21 @@ public class Funcion {
         this.fecha=fecha;
         this.hora=hora;
         this.sala=sala;
+    }
+
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public Sala getSala() {
+        return sala;
     }
 }
