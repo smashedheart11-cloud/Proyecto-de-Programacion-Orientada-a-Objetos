@@ -1,68 +1,41 @@
 package modelo;
 
+import modelo.enums.TipoSala;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sala {
+
     private String idSala;
     private int filas;
     private int columnas;
     private List<Asiento> asientos;
-    private static int CONTADOR=1;
     private TipoSala tipo;
 
-    public Sala(TipoSala tipo){
-        this.idSala=asignarId();
-        this.tipo=tipo;
-        this.asientos=new ArrayList<>();
-        definirSala();
-    }
+    private static int CONTADOR=1;
 
-    private void definirSala(){
-        switch(tipo){
-            case SALAESTANDAR:
-                filas=10;
-                columnas=15;
-                generarAsientos();
-                break;
-            case IMAX:
-                filas=20;
-                columnas=15;
-                generarAsientos();
-                break;
-            case VIP:
-                filas=9;
-                columnas=8;
-                generarAsientos();
-        }
+    public Sala(TipoSala tipo, int filas, int columnas){
+        this.idSala = String.format("SAL-%03d", CONTADOR++);
+        this.tipo = tipo;
+        this.filas = filas;
+        this.columnas = columnas;
+        this.asientos = new ArrayList<>();
+        generarAsientos();
     }
-
-    private void generarAsientos(){
-        char letraFila = 'A';
+    private void generarAsientos() {
+        char letra = 'A';
 
         for (int i = 1; i <= filas; i++) {
             for (int j = 1; j <= columnas; j++) {
-                String codigo = letraFila + String.valueOf(j);
-                asientos.add(new Asiento(i, j, codigo));
+                asientos.add(new Asiento(i, j, letra + String.valueOf(j)));
             }
-            letraFila++;
+            letra++;
         }
     }
 
-    public void obtenerAsientos(){
-        for (Asiento a : asientos){
-            System.out.print(a.numero);
-            if(a.columna==columnas){
-                System.out.println();
-            }
-        }
+    public List<Asiento> getAsientos() {
+        return asientos;
     }
 
-    private String asignarId() {
-        return idSala = String.format("SAL-%03d", CONTADOR++);
-    }
-
-    public String getIdSala() {
-        return idSala;
-    }
 }
