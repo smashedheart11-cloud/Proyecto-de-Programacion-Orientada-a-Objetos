@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.*;
+import modelo.clases.*;
 import modelo.enums.*;
 
 import java.util.ArrayList;
@@ -47,12 +47,12 @@ public class Main {
         factura.agregarBoletos(boleto);
 
         // Calcular total
-        double total = factura.CalcularTotal();
+        double total = factura.calcularTotal();
 
         System.out.println("Total factura: " + total);
 
-        // Liberar asiento
-        asientoSeleccionado.Liberar();
+        // liberar asiento
+        asientoSeleccionado.liberar();
 
         System.out.println("Asiento disponible después de liberar: " + asientoSeleccionado.estaDisponible());
 
