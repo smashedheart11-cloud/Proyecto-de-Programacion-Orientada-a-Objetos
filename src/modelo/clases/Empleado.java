@@ -2,12 +2,12 @@ package modelo.clases;
 
 import modelo.enums.Turno;
 
-public class Empleado {
+public abstract class Empleado {
 
     private static int contadorEmpleado = 1;
-    private String idEmpleado;
-    private String nombre;
-    private Turno turno;
+    protected String idEmpleado;
+    protected String nombre;
+    protected Turno turno;
 
     public Empleado(String nombre, Turno turno) {
         this.idEmpleado = String.format("EMP-%03d", contadorEmpleado++);

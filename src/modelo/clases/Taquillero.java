@@ -2,7 +2,6 @@ package modelo.clases;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.enums.Turno;
 
 public class Taquillero extends Empleado {
@@ -11,8 +10,7 @@ public class Taquillero extends Empleado {
     private Turno turnoTrabajo;
 
     public Taquillero(String nombre, Turno turnoTrabajo) {
-        super(nombre, turnoTrabajo.name());
-        this.turnoTrabajo = turnoTrabajo;
+        super(nombre, turnoTrabajo);
         this.ventasRealizadas = new ArrayList<>();
     }
 
@@ -20,9 +18,8 @@ public class Taquillero extends Empleado {
         return turnoTrabajo;
     }
 
-    public void setTurno(Turno turnoTrabajo) {
-        this.turnoTrabajo = turnoTrabajo;
-        this.turno = turnoTrabajo.;
+    public void setTurno(Turno nuevoTurnoTrabajo) {
+        this.turnoTrabajo = nuevoTurnoTrabajo;
     }
 
     public List<Factura> getVentasRealizadas() {
@@ -33,5 +30,9 @@ public class Taquillero extends Empleado {
         this.ventasRealizadas.add(factura);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + String.format("Ventas realizadas: %s", ventasRealizadas.size());
+    }
 
 }

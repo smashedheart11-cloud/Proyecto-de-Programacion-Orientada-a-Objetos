@@ -49,10 +49,11 @@ public class SistemaControlador {
                 case 1:
                     ventaBoletosControlador.iniciarVenta(cartelera, taquilleroActual, sc);
                     break;
-                    case 2:
-                        salir = true;
-                        break;
-                        default -> throw new IllegalStateException("Opcion no valida: " + opcion);
+                case 2:
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Opcion no valida: ");
             }
         }
     }
