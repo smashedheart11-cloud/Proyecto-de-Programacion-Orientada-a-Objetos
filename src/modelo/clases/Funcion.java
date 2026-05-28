@@ -18,7 +18,7 @@ public class Funcion {
         this.idFuncion = String.format("FUN-%03d", contadorFuncion++);
         this.fechaHora = fechaHora;
         this.pelicula = pelicula;
-        this.sala = sala;
+        this.sala=sala;
         this.boletosVendidos = new ArrayList<>();
         this.asientosFuncion = new ArrayList<>();
         if (sala != null && sala.getAsientos() != null) {
@@ -75,19 +75,26 @@ public class Funcion {
         this.boletosVendidos.add(boleto);
     }
 
-    public boolean ocuparAsiento(String idAsiento) {
-        for (AsientoFuncion asientoFuncion : asientosFuncion){
-            if (asientoFuncion.getAsiento().getIdAsiento().equals(idAsiento)){
-                return true;
+    // esta es nueva
+    public Asiento ocuparAsiento(String identificadorAsiento) {
+        for (AsientoFuncion af : asientosFuncion) {
+            if (af.getAsiento().getIdentificador().equals(identificadorAsiento)) {
+
+                if (af.estaDisponible()) {
+                    af.ocupar();
+                    return af.getAsiento(); // devuelve un objeto asiento
+                } else {
+                    return null; // ya estaba ocupado
+                }
             }
         }
-        return false;
+        return null; //el asientp no existe
     }
 
-    public boolean verificarDisponibilidad() {
+    public boolean verificarDisponibilidad(String idAsiento) {
         for (AsientoFuncion asientoFuncion : asientosFuncion){
-            if (asientoFuncion.estaDisponible()){
-                return true;
+            if (asientoFuncion.getAsiento().getIdentificador().equals(idAsiento)){
+                return asientoFuncion.estaDisponible();
             }
         }
         return false;

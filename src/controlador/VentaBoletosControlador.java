@@ -2,75 +2,37 @@ package controlador;
 
 import modelo.clases.*;
 import modelo.enums.TipoPago;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class VentaBoletosControlador {
 
-    public void iniciarVenta(List<Funcion> cartelera, Taquillero taquillero, Scanner sc) {
-        System.out.println("---CARTELERA ACTUAL---");
-        if (cartelera == null && cartelera.isEmpty()) {
-            System.out.println("---NO HAY FUNCIONES ACTUALMENTE---");
-            return;
-        }
+    // este es el met0do que las ventanas van a invocar cuando el cajero seleccione pagar
+    public Factura procesarVenta(Funcion funcion, List<String> identificadoresAsientos, Taquillero taquillero, TipoPago tipoPago) {
+        //recibe la funcion, una lista con los asientos elegidos, el taquillero que atiende y el tipo de pago
 
-        for (int i = 0; i < cartelera.size(); i++) {
-            Funcion funcion = cartelera.get(i);
-            System.out.println((i + 1) + ". " + funcion.getPelicula().getTitulo() +
-                                        "|Sala: " + funcion.getSala().getTipo().name() +
-                                        "| Precio: $" +
-                                        String.format("%.2f", funcion.getSala().getTipo().getPrecio())
-            );
-        }
-
-        System.out.println("---SELECCION---");
-        int opcionesFuncion = sc.nextInt() - 1;
-        sc.nextLine();
-
-        if (opcionesFuncion >= 0 && opcionesFuncion < cartelera.size()) {
-            Funcion funcionSeleccionada = cartelera.get(opcionesFuncion);
-            realizarPago(funcionSeleccionada, taquillero, sc);
-        } else {
-            System.out.println("---SELECCION NO VALIDA---");
-        }
-    }
-
-    private void realizarPago(Funcion funcion, Taquillero taquillero, Scanner sc) {
         List<Boleto> seleccionCompra = new ArrayList<>();
+        //esta lista es para mandarle todos los boletos a la factura
 
-        System.out.println("FUNCION SELECCIONADA: " + funcion.getPelicula().getTitulo().toUpperCase());
-        System.out.println("Cantidad Boletos: ");
-        int cantidadBoletos = sc.nextInt();
-        sc.nextLine();
+        //para cada asiento
+        for (String idAsiento : identificadoresAsientos) {
 
-        for (int i = 0; i < cantidadBoletos; i++) {
-            System.out.println("Ingrese el asiento del boleto: " + (i + 1));
-            String asiento = sc.nextLine().toUpperCase();
+            //el controlador solo da la orden y en funcion se ocupa el asiento
+            Asiento asientoFisico = funcion.ocuparAsiento(idAsiento);
 
-            if (funcion.ocuparAsiento(asiento)) {
-                for (Asiento asientoSeleccionado : funcion.getSala().getAsientos()) {
-                    if (asientoSeleccionado.getIdentificador().equals(asiento)) {
-                        Boleto nuevoBoleto = new Boleto(funcion, asientoSeleccionado);
-                        seleccionCompra.add(nuevoBoleto);
-
-                        funcion.agregarBoleto(nuevoBoleto);
-
-                        System.out.println("Asiento: " + asiento + " agregado a la seleccion de compra.");
-                        break;
-                    }
-                }
+            if (asientoFisico != null) {
+                //si nos devolvió el asiento, generamos el boleto
+                Boleto nuevoBoleto = new Boleto(funcion, asientoFisico);
+                seleccionCompra.add(nuevoBoleto); //aqui se añade a la lista
+                funcion.agregarBoleto(nuevoBoleto); //para la lista de boletos vendidos
             } else {
-                System.out.println("Error: asiento no disponible");
-                i--;
+                // si nos devolvió null, lanzamos el error para la ventana
+                throw new IllegalStateException("El asiento " + idAsiento + " no está disponible.");
             }
         }
 
-        Factura factura = new Factura(TipoPago.EFECTIVO, seleccionCompra, taquillero);
+        Factura factura = new Factura(tipoPago, seleccionCompra, taquillero);
         taquillero.registrarVenta(factura);
-
-        System.out.println("---COMPRA REALIZADA---");
-        System.out.println(factura.toString());
+        return factura;
     }
 }

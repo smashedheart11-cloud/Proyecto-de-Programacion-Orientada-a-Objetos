@@ -6,16 +6,14 @@ public class Boleto {
     private String idBoleto;
     private Funcion funcion;
     private Asiento asiento;
-    private Sala sala;
     private double precio;
 
     public Boleto (Funcion funcion, Asiento asiento){
         this.idBoleto=String.format("BOL-%03d", contadorBoleto++);
         this.funcion=funcion;
         this.asiento=asiento;
-        this.sala = funcion.getSala();
-        if (this.sala != null && this.sala.getTipo() != null){
-            this.precio = this.sala.getTipo().getPrecio();
+        if (funcion.getSala() != null && funcion.getSala().getTipo() != null){
+            this.precio = funcion.getSala().getTipo().getPrecio();
         }else{
             this.precio = 0;
         }
@@ -27,10 +25,6 @@ public class Boleto {
 
     public Funcion getFuncion() {
         return funcion;
-    }
-
-    public Sala getSala() {
-        return sala;
     }
 
     public Asiento getAsiento() {
@@ -55,7 +49,7 @@ public class Boleto {
                 idBoleto,
                 funcion.getPelicula().getTitulo(),
                 funcion.getFechaHora(),
-                sala.getTipo(),
+                funcion.getSala().getTipo(),
                 asiento.getFila(),
                 asiento.getColumna(),
                 precio

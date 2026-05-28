@@ -1,13 +1,9 @@
 package controlador;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import datosCine.DatosCinema;
 import modelo.clases.Funcion;
 import modelo.clases.Taquillero;
-import modelo.enums.*;
 
 public class SistemaControlador {
 
@@ -17,49 +13,24 @@ public class SistemaControlador {
     private VentaBoletosControlador ventaBoletosControlador;
 
     public SistemaControlador() {
+        // para cargar los datos
         this.datosCinema = new DatosCinema();
         this.ventaBoletosControlador = new VentaBoletosControlador();
+
+        // y ya aqui se ponen los datos
         this.cartelera = datosCinema.obtenerCartelera();
         this.taquilleroActual = datosCinema.obtenerTaquilleroTrabajando();
-        inicializarDatos();
-
     }
 
-    private void inicializarDatos() {
-        Scanner sc = new Scanner(System.in);
-        boolean salir = false;
-
-        System.out.println("HOLA: ");
-        if (taquilleroActual != null) {
-            System.out.println("Taquillero trabajando: " + taquilleroActual.getNombre());
-        } else {
-            System.out.println("No hay aluien atendiendo taquilla.\n");
-            return;
-        }
-        while (!salir) {
-            System.out.println("CARTELERA:\n");
-            System.out.print("1|| Vender Boletos para las funciones:\n");
-            System.out.println("2|| Salir.\n");
-            System.out.println("Seleccione la operacion a realizar:\n");
-
-            int opcion = sc.nextInt();
-            sc.nextLine();
-
-            switch (opcion) {
-                case 1:
-                    ventaBoletosControlador.iniciarVenta(cartelera, taquilleroActual, sc);
-                    break;
-                case 2:
-                    salir = true;
-                    break;
-                default:
-                    System.out.println("Opcion no valida: ");
-            }
-        }
+    public List<Funcion> getCartelera() {
+        return cartelera;
     }
 
-    public static void main(String[] args){
-        SistemaControlador sistema = new SistemaControlador();
-        sistema.inicializarDatos();
+    public Taquillero getTaquilleroActual() {
+        return taquilleroActual;
+    }
+
+    public VentaBoletosControlador getVentaBoletosControlador() {
+        return ventaBoletosControlador;
     }
 }
