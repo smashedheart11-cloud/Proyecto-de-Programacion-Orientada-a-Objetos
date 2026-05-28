@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import modelo.*;
 import datosCine.DatosCinema;
 import modelo.clases.Funcion;
 import modelo.clases.Taquillero;
@@ -23,6 +22,7 @@ public class SistemaControlador {
         this.cartelera = datosCinema.obtenerCartelera();
         this.taquilleroActual = datosCinema.obtenerTaquilleroTrabajando();
         inicializarDatos();
+
     }
 
     private void inicializarDatos() {

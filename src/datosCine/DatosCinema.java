@@ -57,6 +57,26 @@ public class DatosCinema {
         ));
 
     }
+    public List<Funcion> obtenerCartelera() {
+        return funciones;
+    }
 
+    public Taquillero obtenerTaquilleroTrabajando() {
+        int hora = LocalDateTime.now().getHour();
+        Turno turnoActual;
+        if (hora >= 6 && hora < 14)       turnoActual = Turno.MATUTINO;
+        else if (hora >= 14 && hora < 21) turnoActual = Turno.VESPERTINO;
+        else                               turnoActual = Turno.NOCTURNO;
 
+        for (Empleado e : empleados) {
+            if (e instanceof Taquillero t && t.getTurno() == turnoActual) {
+                return t;
+            }
+        }
+        // Fallback: primer taquillero
+        for (Empleado e : empleados) {
+            if (e instanceof Taquillero t) return t;
+        }
+        return null;
+    }
 }
