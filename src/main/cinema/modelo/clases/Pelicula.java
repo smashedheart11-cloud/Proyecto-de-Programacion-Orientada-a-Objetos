@@ -1,6 +1,6 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
-import modelo.enums.Clasificacion;
+import main.cinema.modelo.enums.Clasificacion;
 
 public class Pelicula {
 

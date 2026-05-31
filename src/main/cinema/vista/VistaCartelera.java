@@ -1,15 +1,20 @@
-package vista;
+package main.cinema.vista;
 
-import controlador.SistemaControlador;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import main.cinema.controlador.SistemaControlador;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import modelo.clases.AsientoFuncion;
-import modelo.clases.Funcion;
-import modelo.clases.Taquillero;
+import main.cinema.modelo.clases.Funcion;
+import main.cinema.modelo.clases.Taquillero;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
 public class VistaCartelera {
@@ -54,17 +59,18 @@ public class VistaCartelera {
 
         ScrollPane scroll = new ScrollPane(lista);
         scroll.setFitToWidth(true);
-        scroll.setStyle("-fx-background: transparent;");
+        // el fondo del panel de desplazamiento se limpia así:
+        scroll.setStyle("-fx-background:" + BG + "; -fx-background-color: transparent;");
 
         rootPrincipal.getChildren().addAll(titulo, empleado, scroll);
     }
 
     private HBox crearFila(Funcion f) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
-        long disponibles = f.getAsientosFuncion().stream().filter(AsientoFuncion::estaDisponible).count();
+        long disponibles = f.obtenerCantidadAsientosDiponibles();
 
         Label hora = new Label(f.getFechaHora().format(fmt));
-        hora.setStyle("-fx-text-fill: #60a5fa;");
+        hora.setStyle("-fx-text-fill: #60a5fa; -fx-font-size: 16; -fx-font-weight: bold;");
 
         Label peli = new Label(f.getPelicula().getTitulo() + " (" + f.getSala().getTipo().name() + ")");
         peli.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
@@ -75,10 +81,10 @@ public class VistaCartelera {
         VBox datos = new VBox(3, peli, info);
         HBox.setHgrow(datos, Priority.ALWAYS);
 
-        Button btn = new Button("Seleccionar");
+        Button btn = new Button("Seleccionar Asientos");
         btn.setDisable(disponibles == 0);
-        btn.setStyle("-fx-background-color: " + BTN + "; -fx-text-fill: white;");
-        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: " + BTN_HOVER + "; -fx-text-fill: white;"));
+        btn.setStyle("-fx-background-color: " + BTN + "; -fx-text-fill: white; -fx-cursor: hand;");
+        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: " + BTN_HOVER + "; -fx-text-fill: white; -fx-cursor: hand;"));
         btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: " + BTN + "; -fx-text-fill: white;"));
 
         btn.setOnAction(e -> {
@@ -87,7 +93,14 @@ public class VistaCartelera {
             construirInterfaz(); // Refresca los números al regresar
         });
 
-        HBox fila = new HBox(15, hora, datos, btn);
+        Image imgPoster = new Image("file:src/main/recursos/" + f.getPelicula().getTitulo() + ".jpg");
+
+        ImageView visorPoster = new ImageView(imgPoster);
+        visorPoster.setFitHeight(80);
+        visorPoster.setFitWidth(55);
+        visorPoster.setPreserveRatio(true);
+
+        HBox fila = new HBox(15, visorPoster, hora, datos, btn);
         fila.setAlignment(Pos.CENTER_LEFT);
         fila.setStyle("-fx-background-color: " + CARD + "; -fx-padding: 10;");
 

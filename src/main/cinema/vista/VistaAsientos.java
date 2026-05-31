@@ -1,16 +1,16 @@
-package vista;
+package main.cinema.vista;
 
-import controlador.SistemaControlador;
+import main.cinema.controlador.SistemaControlador;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modelo.clases.AsientoFuncion;
-import modelo.clases.Factura;
-import modelo.clases.Funcion;
-import modelo.enums.TipoPago;
+import main.cinema.modelo.clases.AsientoFuncion;
+import main.cinema.modelo.clases.Factura;
+import main.cinema.modelo.clases.Funcion;
+import main.cinema.modelo.enums.TipoPago;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +101,18 @@ public class VistaAsientos {
             }
         });
 
-        VBox layout = new VBox(15, new Label("Pantalla"), grid, new Label("Método de Pago:"), comboPago, btnConfirmar);
+        Label lblPantalla = new Label("============PANTALLA===========");
+        lblPantalla.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+
+        Label lblMetodo = new Label("Metodo de Pago:");
+        lblMetodo.setStyle("-fx-text-fill: white;");
+
+        VBox layout = new VBox(15, lblPantalla, grid, lblMetodo, comboPago, btnConfirmar);
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: " + BG + "; -fx-padding: 20;");
 
         ventana.setScene(new Scene(layout, 500, 500));
         ventana.showAndWait(); // Pausa la cartelera principal hasta terminar
+
     }
 }

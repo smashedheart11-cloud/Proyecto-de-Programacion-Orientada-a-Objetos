@@ -1,9 +1,9 @@
-package controlador;
+package main.cinema.controlador;
 
 import java.util.List;
-import datosCine.DatosCinema;
-import modelo.clases.Funcion;
-import modelo.clases.Taquillero;
+import main.cinema.modelo.repositorio.DatosCinema;
+import main.cinema.modelo.clases.Funcion;
+import main.cinema.modelo.clases.Taquillero;
 
 public class SistemaControlador {
 

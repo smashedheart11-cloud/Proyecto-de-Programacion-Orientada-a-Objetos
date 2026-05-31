@@ -1,6 +1,6 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
-import modelo.enums.Turno;
+import main.cinema.modelo.enums.Turno;
 
 public abstract class Empleado {
 

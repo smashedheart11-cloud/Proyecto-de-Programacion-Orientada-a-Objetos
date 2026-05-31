@@ -1,7 +1,7 @@
-package controlador;
+package main.cinema.controlador;
 
-import modelo.clases.*;
-import modelo.enums.TipoPago;
+import main.cinema.modelo.clases.*;
+import main.cinema.modelo.enums.TipoPago;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class VentaBoletosControlador {
         //para cada asiento
         for (String idAsiento : identificadoresAsientos) {
 
-            //el controlador solo da la orden y en funcion se ocupa el asiento
+            //el main.cinema.controlador solo da la orden y en funcion se ocupa el asiento
             Asiento asientoFisico = funcion.ocuparAsiento(idAsiento);
 
             if (asientoFisico != null) {

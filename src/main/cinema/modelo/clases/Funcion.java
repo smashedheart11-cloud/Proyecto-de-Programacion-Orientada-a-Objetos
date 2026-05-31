@@ -1,4 +1,4 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -98,6 +98,10 @@ public class Funcion {
             }
         }
         return false;
+    }
+
+    public long obtenerCantidadAsientosDiponibles() {
+        return this.asientosFuncion.stream().filter(AsientoFuncion::estaDisponible).count();
     }
 
     @Override

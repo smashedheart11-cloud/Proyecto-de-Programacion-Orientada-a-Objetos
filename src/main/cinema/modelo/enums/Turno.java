@@ -1,4 +1,4 @@
-package modelo.enums;
+package main.cinema.modelo.enums;
 
 public enum Turno {
     MATUTINO,

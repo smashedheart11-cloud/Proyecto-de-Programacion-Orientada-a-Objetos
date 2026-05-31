@@ -1,4 +1,4 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
 public class Asiento {
 

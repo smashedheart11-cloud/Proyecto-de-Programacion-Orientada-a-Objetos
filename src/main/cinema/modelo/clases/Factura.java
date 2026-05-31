@@ -1,8 +1,8 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import modelo.enums.TipoPago;
+import main.cinema.modelo.enums.TipoPago;
 
 public class Factura {
 
@@ -62,14 +62,14 @@ public class Factura {
         return total;
     }
     private String generarDetallesBoletos() {
-        String detalles = "";
-        for (Boleto b: boletos){
-            detalles += String.format(" Datos fucion: %s | Asiento: %s |$%.2f\n",
+        StringBuilder detalles = new StringBuilder();
+        for (Boleto b : boletos) {
+            detalles.append(String.format(" Datos función: %s | Asiento: %s | $%.2f\n",
                     b.getFuncion().getPelicula().getTitulo(),
                     b.getAsiento().getIdentificador(),
-                    b.getPrecio());
+                    b.getPrecio()));
         }
-        return detalles;
+        return detalles.toString();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Factura {
                "________________GRACIAS____________\n";
        return String.format(ticket,
                idFactura,
-               fechaFactura.toString(),
+               fechaFactura.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
                empleadoVenta.getNombre(),
                tipoPago,
                generarDetallesBoletos(),

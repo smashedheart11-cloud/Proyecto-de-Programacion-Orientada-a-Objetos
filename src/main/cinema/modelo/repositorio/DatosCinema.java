@@ -1,9 +1,9 @@
-package datosCine;
+package main.cinema.modelo.repositorio;
 
-import modelo.clases.*;
-import modelo.enums.Clasificacion;
-import modelo.enums.TipoSala;
-import modelo.enums.Turno;
+import main.cinema.modelo.clases.*;
+import main.cinema.modelo.enums.Clasificacion;
+import main.cinema.modelo.enums.TipoSala;
+import main.cinema.modelo.enums.Turno;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -40,8 +40,8 @@ public class DatosCinema {
 
         Pelicula pelicula1 = new Pelicula("Mulholland Drive", "Suspenso/Misterio", Clasificacion.C, "Ingles");
         Pelicula pelicula2 = new Pelicula("Children of Men", "Suspenso//Accion", Clasificacion.C, "Ingles");
-        Pelicula pelicula3 = new Pelicula("50 Firt Date", "Comedia/Romance", Clasificacion.B, "Ingles");
-        Pelicula pelicula4 = new Pelicula("Project Hail May", "Sci-fi/Aventura", Clasificacion.B, "Ingles");
+        Pelicula pelicula3 = new Pelicula("50 First Dates", "Comedia/Romance", Clasificacion.B, "Ingles");
+        Pelicula pelicula4 = new Pelicula("Project Hail Mary", "Sci-fi/Aventura", Clasificacion.B, "Ingles");
         Pelicula pelicula5 = new Pelicula("Lake Mungo", "Terror/Misterio", Clasificacion.D, "Ingles");
 
         peliculas.addAll(List.of(pelicula1, pelicula2, pelicula3, pelicula4, pelicula5));

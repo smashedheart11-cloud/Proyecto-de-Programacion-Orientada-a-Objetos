@@ -1,6 +1,6 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
-import modelo.enums.EstadoAsiento;
+import main.cinema.modelo.enums.EstadoAsiento;
 
 public class AsientoFuncion {
 

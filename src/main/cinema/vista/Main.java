@@ -1,6 +1,6 @@
-package vista;
+package main.cinema.vista;
 
-import controlador.SistemaControlador;
+import main.cinema.controlador.SistemaControlador;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

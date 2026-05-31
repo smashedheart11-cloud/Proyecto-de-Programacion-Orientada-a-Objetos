@@ -1,8 +1,8 @@
-package modelo.clases;
+package main.cinema.modelo.clases;
 
 import java.util.ArrayList;
 import java.util.List;
-import modelo.enums.TipoSala;
+import main.cinema.modelo.enums.TipoSala;
 
 public class Sala {
 
